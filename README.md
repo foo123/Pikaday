@@ -4,7 +4,8 @@ Pikaday
 ### A refreshing JavaScript Datepicker
 
 * Lightweight (less than 5kb minified and gzipped)
-* No dependencies (but plays well with [Moment.js][moment])
+* No dependencies <del>(but plays well with [Moment.js][moment])</del>
+* Date `encoder` / `decoder` are available as options to be overwritten (more modular, not necesarily by `moment.js`)
 * Modular CSS classes for easy styling
 
 [**Try Pikaday Demo →**][Pikaday]

@@ -1,2 +1,4 @@
+/.gitignore
+_notused/
 node_modules
 .c9revisions
