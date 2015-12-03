@@ -233,9 +233,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 .pika-select.pika-select-hour {
     font-size: inherit;
     padding: 8px;
+    cursor: pointer;
 }
 
 .pika-time-sep {
-    font-size: 1.4m;
-    padding: 2px;
+    font-size: 1.5em;
+    font-weight: normal;
+    padding: 1px 3px;
+    vertical-align: middle;
 }
