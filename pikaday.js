@@ -217,6 +217,7 @@ defaults = {
 
     // time
     showTime: true,
+    showSeconds: true,
     
     // when numberOfMonths is used, this will help you to choose where the main calendar will be (default `left`, can be set to `right`)
     // only used for the first display or when a selected date is not visible
@@ -385,19 +386,18 @@ renderTimePicker = function(num_options, selected_val, select_class, display_fun
     return to_return;
 },
 
+double_digit = function( i ) { return (i < 10 ?"0":"") + i; },
+
 renderTime = function(hh, mm, ss, opts) {
     var to_return = '<table cellpadding="0" cellspacing="0" class="pika-time"><tbody><tr>' +
-    renderTimePicker(24, hh, 'pika-select-hour', function(i) {
-        if (opts.use24hour) {
-            return i;
-        } else {
-            return (i%12) + ' ' + (i<12 ? opts.i18n.AM : opts.i18n.PM);
-        }
-    }) +
+    renderTimePicker(24, hh, 'pika-select-hour', false !== opts.hour24
+    ? double_digit
+    : function( i ) { return (i%12) + ' ' + (i<12 ? opts.i18n.AM : opts.i18n.PM); }
+    ) +
     '<td><span class="pika-time-sep">:</span></td>' +
-    renderTimePicker(60, mm, 'pika-select-minute', function(i) { if (i < 10) return "0" + i; return i }) +
+    renderTimePicker(60, mm, 'pika-select-minute', double_digit) +
     '<td><span class="pika-time-sep">:</span></td>' +
-    renderTimePicker(60, ss, 'pika-select-second', function(i) { if (i < 10) return "0" + i; return i }) +
+    renderTimePicker(60, ss, 'pika-select-second', double_digit) +
     '</tr></tbody></table>';
     return to_return;
 },
