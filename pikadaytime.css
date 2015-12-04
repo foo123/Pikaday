@@ -1,10 +1,12 @@
 @charset "UTF-8";
-
-/*!
- * Pikaday
- * Copyright © 2014 David Bushell | BSD & MIT license | http://dbushell.com/
- */
-
+/**
+* Pikadaytime
+* https://github.com/foo123/Pikadaytime
+* @version 2.0.0
+*
+* adapted from: 
+* Copyright © 2014 David Bushell | BSD & MIT license | https://github.com/dbushell/Pikaday, https://github.com/owenmead/Pikaday
+**/
 .pika-single {
     z-index: 9999;
     display: block;
