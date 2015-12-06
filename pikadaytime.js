@@ -222,6 +222,9 @@ defaults = {
     i18n: {
         AM            : 'am',
         PM            : 'pm',
+        hours         : 'Hours',
+        minutes       : 'Minutes',
+        seconds       : 'Seconds',
         previousMonth : 'Previous Month',
         nextMonth     : 'Next Month',
         months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -360,8 +363,8 @@ renderTable = function(opts, data) {
     return '<table cellpadding="0" cellspacing="0" class="pika-table">' + renderHead(opts) + renderBody(data) + '</table>';
 },
 
-renderTimePicker = function(num_options, selected_val, select_class, display_func) {
-    var to_return = '<td><select class="pika-select '+select_class+'">';
+renderTimePicker = function(num_options, selected_val, select_class, display_func, title) {
+    var to_return = '<td><select title="'+title+'" class="pika-select '+select_class+'">';
     for (var i=0; i<num_options; i++) {
     to_return += '<option value="'+i+'" '+(i==selected_val ? 'selected' : '')+'>'+display_func(i)+'</option>'
     }
@@ -376,11 +379,11 @@ renderTime = function(hh, mm, ss, opts) {
     renderTimePicker(24, hh, 'pika-select-hour', false !== opts.hour24
     ? double_digit
     : function( i ) { return (i%12) + ' ' + (i<12 ? opts.i18n.AM : opts.i18n.PM); }
-    ) +
+    , opts.i18n.hours) +
     '<td><span class="pika-time-sep">:</span></td>' +
-    renderTimePicker(60, mm, 'pika-select-minute', double_digit) +
+    renderTimePicker(60, mm, 'pika-select-minute', double_digit, opts.i18n.minutes) +
     '<td><span class="pika-time-sep">:</span></td>' +
-    renderTimePicker(60, ss, 'pika-select-second', double_digit) +
+    renderTimePicker(60, ss, 'pika-select-second', double_digit, opts.i18n.seconds) +
     '</tr></tbody></table>';
     return to_return;
 },
