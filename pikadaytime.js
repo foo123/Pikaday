@@ -382,8 +382,8 @@ renderTime = function(hh, mm, ss, opts) {
     , opts.i18n.hours) +
     '<td><span class="pika-time-sep">:</span></td>' +
     renderTimePicker(60, mm, 'pika-select-minute', double_digit, opts.i18n.minutes) +
-    '<td><span class="pika-time-sep">:</span></td>' +
-    renderTimePicker(60, ss, 'pika-select-second', double_digit, opts.i18n.seconds) +
+    (opts.showSeconds ? ('<td><span class="pika-time-sep">:</span></td>' +
+    renderTimePicker(60, ss, 'pika-select-second', double_digit, opts.i18n.seconds)) : '') +
     '</tr></tbody></table>';
     return to_return;
 },
@@ -416,7 +416,7 @@ Pikadaytime = function Pikadaytime( options ) {
                         // Preserve time selection when date changed
                         opts.showTime ? self.el.querySelector('.pika-select-hour').selectedIndex : 0,
                         opts.showTime ? self.el.querySelector('.pika-select-minute').selectedIndex : 0,
-                        opts.showTime ? self.el.querySelector('.pika-select-second').selectedIndex : 0,
+                        opts.showTime && opts.showSeconds ? self.el.querySelector('.pika-select-second').selectedIndex : 0,
                         0
                     );
                 
@@ -587,6 +587,7 @@ Pikadaytime.prototype = {
         opts.isRTL = !!opts.isRTL;
         
         opts.showTime = !!opts.showTime;
+        opts.showSeconds = !!opts.showSeconds;
 
         opts.field = (opts.field && opts.field.nodeName) ? opts.field : null;
 
@@ -636,7 +637,7 @@ Pikadaytime.prototype = {
      * Currently defaulting to setting date to today if not set
      */
     setTime: function( hours, minutes, seconds ) {
-        var self = this, date, showTime = self._o.showTime, f;
+        var self = this, date, showTime = self._o.showTime, showSeconds = self._o.showSeconds, f;
         self._t_update = true;
         if ( self._d )
         {
@@ -660,7 +661,7 @@ Pikadaytime.prototype = {
             {
                 seconds = parseInt(seconds, 10) || 0;
                 date.setSeconds( seconds );
-                if ( showTime && (f=self.el.querySelector('.pika-select-second')) )
+                if ( showTime && showSeconds && (f=self.el.querySelector('.pika-select-second')) )
                     f.options[seconds].selected = true;
             }
         }
@@ -705,7 +706,7 @@ Pikadaytime.prototype = {
         else if ( isDate(max) && date > max ) date = max;
 
         self._d = new Date( date.getTime() );
-        setToStartOfDay( self._d, self._o.showTime );
+        setToStartOfDay( self._d, self._o.showTime, self._o.showSeconds );
         self.gotoDate( self._d );
 
         if ( self._o.field )
@@ -806,7 +807,7 @@ Pikadaytime.prototype = {
     setMinDate: function( value ) {
         var self = this;
         if ( !isDate(value) ) return;
-        setToStartOfDay( value, self._o.showTime );
+        setToStartOfDay( value, self._o.showTime, self._o.showSeconds );
         self._o.minDate = value;
         self._o.minYear  = value.getFullYear();
         self._o.minMonth = value.getMonth();
@@ -818,7 +819,7 @@ Pikadaytime.prototype = {
     setMaxDate: function( value ) {
         var self = this;
         if ( !isDate(value) ) return;
-        setToStartOfDay( value, self._o.showTime );
+        setToStartOfDay( value, self._o.showTime, self._o.showSeconds );
         self._o.maxDate = value;
         self._o.maxYear  = value.getFullYear();
         self._o.maxMonth = value.getMonth();
@@ -860,7 +861,7 @@ Pikadaytime.prototype = {
                     renderTime(
                         is_date ? self._d.getHours() : 0,
                         is_date ? self._d.getMinutes() : 0,
-                        is_date ? self._d.getSeconds() : 0,
+                        is_date && opts.showSeconds ? self._d.getSeconds() : 0,
                         opts)
                 + '</div>';
         }
