@@ -103,9 +103,16 @@ getDaysInMonth = function(year, month) {
     return [31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
 },
 
-setToStartOfDay = function(date, with_time) {
-    if ( with_time ) date.setMilliseconds(0);
-    else date.setHours(0,0,0,0);
+setToStartOfDay = function(date, with_time, with_seconds) {
+    if ( with_time )
+    {
+        date.setMilliseconds(0);
+        if ( !with_seconds ) date.setSeconds(0);
+    }
+    else
+    {
+        date.setHours(0,0,0,0);
+    }
 },
 
 defaultEncoder = function( d, pikaday ) {
