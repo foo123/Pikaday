@@ -87,11 +87,11 @@ removeClass = function( el, className ) {
 },
 
 isArray = function(obj) {
-    return (null != obj) && ('[object Array]' === toString.call(obj));
+    return (null != obj) && ('[object Array]' === Object.prototype.toString.call(obj));
 },
 
 isDate = function(obj) {
-    return (null != obj) && ('[object Date]' === toString.call(obj)) && !isNaN(obj.getTime());
+    return (null != obj) && ('[object Date]' === Object.prototype.toString.call(obj)) && !isNaN(obj.getTime());
 },
 
 isLeapYear = function(year) {
