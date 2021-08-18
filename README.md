@@ -1,7 +1,7 @@
-Pikaday
-========
+Pikadaytime
+===========
 
-### A refreshing JavaScript Datepicker
+### A refreshing JavaScript Datetimepicker
 
 * Lightweight (less than 5kb minified and gzipped)
 * No dependencies <del>(but plays well with [Moment.js][moment])</del>
@@ -267,18 +267,6 @@ i18n: {
 ```
 
 You must provide 12 months and 7 weekdays (with abbreviations). Always specify weekdays in this order with Sunday first. You can change the `firstDay` option to reorder if necessary (0: Sunday, 1: Monday, etc). You can also set `isRTL` to `true` for languages that are read right-to-left.
-
-
-## Extensions
-
-### Timepicker
-
-Pikaday is a pure datepicker. It will not support picking a time of day. However, there have been efforts to add time support to Pikaday.  
-See [#1][issue1] and [#18][issue18]. These reside in their own fork.
-
-You can use the work [@owenmead][owenmead] did most recently at [owenmead/Pikaday][owen Pika]  
-A more simple time selection approach done by [@xeeali][xeeali] at [xeeali/Pikaday][xeeali Pika] is based on version 1.2.0.  
-Also [@stas][stas] has a fork [stas/Pikaday][stas Pika], but is now quite old
 
 
 ## Browser Compatibility
