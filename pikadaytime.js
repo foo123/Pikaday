@@ -1,17 +1,17 @@
 /**
 * Pikadaytime
 * https://github.com/foo123/Pikadaytime
-* @version 2.0.1
+* @version 2.0.2
 *
 * adapted from:
 * Copyright © 2014 David Bushell | BSD & MIT license | https://github.com/dbushell/Pikaday, https://github.com/owenmead/Pikaday
 **/
 !function(root, name, factory) {
 "use strict";
-if ('object' === typeof exports)
+if (('object' === typeof module) && module.exports)
     // CommonJS module
     module.exports = factory();
-else if ('function' === typeof define && define.amd)
+else if (('function' === typeof define) && define.amd)
     // AMD. Register as an anonymous module.
     define(function(req) {return factory();});
 else
@@ -527,7 +527,8 @@ Pikadaytime = function Pikadaytime(options) {
     self.el = document.createElement('div');
     self.el.className = 'pika-single' + (opts.isRTL ? ' is-rtl' : '');
 
-    addEvent(self.el, 'mousedown', self._onMouseDown, true);
+    if ('onmousedown' in self.el) addEvent(self.el, 'mousedown', self._onMouseDown, true);
+    if ('ontouchend' in self.el) addEvent(self.el, 'touchend', self._onMouseDown, true);
     addEvent(self.el, 'change', self._onChange);
 
     if (opts.field)
@@ -570,7 +571,7 @@ Pikadaytime = function Pikadaytime(options) {
     }
 };
 
-Pikadaytime.VERSION = '2.0.1';
+Pikadaytime.VERSION = '2.0.2';
 
 /**
  * public Pikaday API
@@ -1041,7 +1042,8 @@ Pikadaytime.prototype = {
     dispose: function() {
         var self = this;
         self.hide();
-        removeEvent(self.el, 'mousedown', self._onMouseDown, true);
+        if ('onmousedown' in self.el) removeEvent(self.el, 'mousedown', self._onMouseDown, true);
+        if ('ontouchend' in self.el) removeEvent(self.el, 'touchend', self._onMouseDown, true);
         removeEvent(self.el, 'change', self._onChange);
         if (self._o.field)
         {
@@ -1056,6 +1058,5 @@ Pikadaytime.prototype = {
         if (self.el.parentNode) self.el.parentNode.removeChild(self.el);
     }
 };
-
 return Pikadaytime;
 });
