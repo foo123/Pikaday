@@ -8,9 +8,8 @@ Pikadaytime
 * Date `encoder` / `decoder` are available as options to be overwritten (more modular, not necesarily by `moment.js`)
 * Modular CSS classes for easy styling
 
-[**Try Pikaday Demo →**][Pikaday]
+![Pikadaytime][/pikadaytime.png]
 
-![Pikaday Screenshot][screenshot]
 
 **Production ready?** Since version 1.0.0 Pikaday is stable and used in production. If you do however find bugs or have feature requests please submit them to the [GitHub issue tracker][issues].  
 Also see the [changelog](CHANGELOG.md)
