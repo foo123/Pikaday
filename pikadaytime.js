@@ -62,8 +62,8 @@ fireEvent = function(el, eventName, data) {
 
 trim_re = /^\s+|\s+$/g,
 trim = String.prototype.trim
-    ? function(s) { return s.trim(); }
-    : function(s){ return s.replace(trim_re,''); }
+    ? function(s) {return s.trim();}
+    : function(s) {return s.replace(trim_re,'');}
 ,
 
 hasClass = function(el, className) {
@@ -204,6 +204,7 @@ defaults = {
     maxMonth: undefined,
 
     isRTL: false,
+    className: '',
 
     // Additional text to append to the year in the calendar title
     yearSuffix: '',
@@ -555,6 +556,11 @@ Pikadaytime = function Pikadaytime(options) {
     else
     {
         self.gotoDate(new Date());
+    }
+
+    if (opts.className && trim(opts.className).length)
+    {
+        self.el.className += ' ' + opts.className;
     }
 
     if (opts.bound)
